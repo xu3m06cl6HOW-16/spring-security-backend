@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.lee.mapper.UserMapper">
+	
+	<insert id="userRegister" useGeneratedKeys="true" keyProperty="id">
+		insert into user (
+		user_name, nick_name, password, status, email, phonenumber, sex, avatar
+		)values(
+		#{userName}, #{nickName}, #{password}, #{status}, 
+		#{email}, #{phonenumber}, #{sex}, #{avatar}
+		);
+	</insert>
+	
+	<select id="checkUserName" resultType="Integer">
+		select count(*) from user where user_name = #{userName};
+	</select>
+	
+	<select id="checkUserEmail" resultType="Integer">
+		select count(*) from user where email = #{email};
+	</select>
+	
+	<insert id="insertUserRoleByUserId">
+		insert into sys_user_role values(#{userId}, #{roleId});
+	</insert>
+	
+	<update id="userUpdate">
+		update user
+		set user_name = #{userName}, nick_name = #{nickName}, status = #{status}, 
+			email = #{email}, phonenumber = #{phonenumber}, sex = #{sex}, update_by = #{id}, avatar = #{avatar}
+		WHERE id = #{id};
+	</update>
+	
+	<select id="getBasicUserList" resultType="com.springboot.lee.pojo.User">
+		SELECT * FROM user a
+		WHERE NOT EXISTS (
+		    SELECT *
+		    FROM sys_user_role b
+		    WHERE b.user_id = a.id
+		    AND b.role_id = 1
+		)
+	</select>
+	
+</mapper>
