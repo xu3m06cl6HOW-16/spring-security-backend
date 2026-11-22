@@ -26,8 +26,33 @@
 	
 	<update id="userUpdate">
 		update user
-		set user_name = #{userName}, nick_name = #{nickName}, status = #{status}, 
-			email = #{email}, phonenumber = #{phonenumber}, sex = #{sex}, update_by = #{id}, avatar = #{avatar}
+		<set>
+			<if test="userName!=null">
+				user_name = #{userName},
+			</if>
+			<if test="nickName!=null">
+				nick_name = #{nickName},
+			</if>
+			<if test="status!=null">
+				status = #{status}, 
+			</if>
+			<if test="email!=null">
+				email = #{email},
+			</if>
+			<if test="phonenumber!=null">
+				phonenumber = #{phonenumber},
+			</if>
+			<if test="sex!=null">
+				sex = #{sex},
+			</if>
+			<if test="id!=null">
+				update_by = #{id},
+			</if>
+			<if test="avatar!=null">
+				avatar = #{avatar},
+			</if>
+			del_flag = 0
+		</set>
 		WHERE id = #{id};
 	</update>
 	

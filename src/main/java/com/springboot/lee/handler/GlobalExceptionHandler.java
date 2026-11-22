@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.springboot.lee.domain.ResponseResult;
-
+//自定義未通過驗證異常處理
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
