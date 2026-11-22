@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.springboot.lee.constants.UserStatus;
 import com.springboot.lee.domain.LoginUser;
 import com.springboot.lee.mapper.MenuMapper;
 import com.springboot.lee.mapper.UserMapper;
@@ -31,7 +32,7 @@ class UserDetailServiceImpl implements UserDetailsService{
 		//查詢用戶訊息
 		QueryWrapper<User> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("user_name", username);
-		queryWrapper.ne("status", 1);
+		queryWrapper.ne("status", UserStatus.DISABLED.getCode());
 		User user = userMapper.selectOne(queryWrapper);
 		
 		if(user == null) {

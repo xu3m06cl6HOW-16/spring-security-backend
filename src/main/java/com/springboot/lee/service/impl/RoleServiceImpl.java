@@ -27,7 +27,6 @@ public class RoleServiceImpl implements RoleService{
 		List<Role> roleList = roleMapper.selectList(null);
 		Set<Role> roleSet = new HashSet<>(roleList);
 		map.put("roleSet", roleSet);
-		System.out.println(roleSet);
 		return new ResponseResult(HttpStatus.OK.value(), "getRoleSet", map);
 	}
 

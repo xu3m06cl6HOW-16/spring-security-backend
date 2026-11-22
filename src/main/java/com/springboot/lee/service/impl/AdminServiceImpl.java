@@ -43,7 +43,7 @@ public class AdminServiceImpl implements AdminService{
 		ArrayList<Long> normalUsers = new ArrayList<Long>();
 		
 		for(UserStatusDTO userStatusDTO : userStatusDTOList) { //收集停用與啟用用戶
-			if("1".equals(userStatusDTO.getStatus())) {
+			if(UserStatus.DISABLED.getCode().equals(userStatusDTO.getStatus())) {
 				disabledUsers.add(userStatusDTO.getId());
 			}else {
 				normalUsers.add(userStatusDTO.getId());

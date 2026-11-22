@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -50,10 +51,7 @@ public class LoginServiceImpl implements LoginService{
 		}catch(BadCredentialsException e) {
 			throw new BadCredentialsException("Login Failed");
 		}
-		
-
-		
-		return new ResponseResult(200, "loginSuccess.", map);
+		return new ResponseResult(HttpStatus.OK.value(), "loginSuccess.", map);
 	}
 
 	@Override
@@ -67,7 +65,7 @@ public class LoginServiceImpl implements LoginService{
 		//刪除redis中的值
 		redisCache.deleteObject("login:" + userid);
 		
-		return new ResponseResult(200, "logout success.");
+		return new ResponseResult(HttpStatus.OK.value(), "logout success.");
 	}
 
 }
